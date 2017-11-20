@@ -1,0 +1,82 @@
+/* Defaut screen */
+tScreen <- 200;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000100000100000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000010001000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000111111100000; tScreen <- tScreen + 1;
+!tScreen <- 0b0001101110110000; tScreen <- tScreen + 1;
+!tScreen <- 0b0011111111111000; tScreen <- tScreen + 1;
+!tScreen <- 0b0010111111101000; tScreen <- tScreen + 1;
+!tScreen <- 0b0010100000101000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000011011000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+
+i <- 0;
+tScreen <- 200;
+txCurseur <- 100;
+maskCurseur <- 0b0000000000000001;
+while i != 16 do
+  screen i <- !tScreen;
+  tScreen <- tScreen + 1;
+
+  !txCurseur <- maskCurseur;
+  maskCurseur <- maskCurseur + maskCurseur;
+  txCurseur <- txCurseur + 1;
+
+  i <- i + 1;
+done;
+
+posxCurseur <- 8;
+posyCurseur <- 15;
+
+print 'G';
+print 'o';
+print ' ';
+print '!';
+
+while 1 do
+  txtmpCurseur <- 100 + posxCurseur;
+  txCurseur <- txtmpCurseur | !tScreen;
+  screen posyCurseur <- !txCurseur;
+  read caract;
+/* Déplacement du curseur */
+  if caract = 'q' then
+    if posxCurseur != 0 then
+      posxCurseur <- posxCurseur - 1;
+    end;
+  end;
+  if caract = 'd' then
+    if posxCurseur != 15 then
+      posxCurseur <- posxCurseur + 1;
+    end;
+  end;
+  if caract = 'z' then
+    if posxCurseur != 0 then
+      posyCurseur <- posyCurseur - 1;
+    end;
+  end;
+  if caract = 's' then
+    if posyCurseur != 15 then
+      posyCurseur <- posyCurseur + 1;
+    end;
+  end;
+
+  if caract = ' ' then
+    ligne <- posyCurseur;
+    xmask <- !txCurseur;
+    tScreen <- 200 + ligne;
+    act <- !tScreen | xmask;
+    screen ligne <- act;
+    if !tScreen & mask then
+     !tScreen <- !tScreen ^ mask;
+      mask <- 0;
+    end;
+    screen ligne <- !tScreen;
+  end;
+done;

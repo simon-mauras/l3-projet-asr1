@@ -1,0 +1,19 @@
+# Un programme qui écrit en majuscule (sur TTY) ce que l'utilisateur rentre (keyboard)
+
+        movi r1, 0xFFEF   # TTY
+        movi r2, 0xFFE0   # KEYBOARD
+        movi r3, 0x8000   # Negative integer ?
+        movi r6, 0x7FFF
+        movi r7, 0xFFFF
+begin:  lw r4, r2, 0      # read
+        movi r5, -97
+        add r5, r4, r5
+        nand r5, r3, r5
+cond1:  beq r5, r6, endif # Si le caractere est avant 'a' (r4 - 97 < 0)
+        movi r5, -123
+        add r5, r4, r5
+        nand r5, r3, r5
+cond2:  beq r5, r7, endif # Si le caractere est après 'z' (r4 - 126 >= 0)
+        addi r4, r4, -32  # miniscule -> MAJUSCULE
+endif:  sw r4, r1, 0      # write
+        beq r0, r0, begin

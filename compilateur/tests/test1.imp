@@ -1,0 +1,10 @@
+if 1 = 0 then
+  read Salut;
+  print Salut;
+end;
+
+n <- 10;
+while n != 0 do
+  print n;
+  n <- n-1;
+done

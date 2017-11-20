@@ -1,0 +1,20 @@
+while 2 = 2 do
+  /* print alphabet in decreasing order */
+  s <- 122;
+  while s != 96 do
+    print s;
+    s <- s-1;
+  done;
+  
+  /* while input is empty */
+  s <- 0;
+  while s = 0 do
+    read s;
+  done;
+
+  /* print "\n ok \n" */
+  print '\n';
+  print 'o';
+  print 'k';
+  print '\n';
+done;

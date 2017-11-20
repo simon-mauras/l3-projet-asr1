@@ -1,0 +1,8 @@
+# Programme qui calcule la différence de deux entiers
+
+addi r1, r0, 30
+addi r2, r0, 16
+nand r3, r2, r2  # Complément à 1 de 16
+addi r3, r3, 1   # Complément à 2 de 16
+add r4, r1, r3   # Soustraction
+halt

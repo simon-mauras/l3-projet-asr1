@@ -1,0 +1,4 @@
+lw r1, 0, truc
+.space 10
+truc:  .fill 5
+chose: .fill 6

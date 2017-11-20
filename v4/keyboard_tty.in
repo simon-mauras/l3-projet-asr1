@@ -1,0 +1,11 @@
+# Un programme qui recopie l'entrée (keyboard) sur la sortie (tty).
+
+        movi r1, 0xFFEF       # TTY ADDRESS
+        movi r2, 0xFFE0       # KEYBOARD ADDRESS
+begin:  lw r3, r2, 0          # READ (KEYBOARD)
+        addi r3, r3, -10      # STALL !
+        addi r3, r3, 10       #
+        sw r3, r1, 0          # WRITE (TTY)
+        beq r0, r0, begin     # STOMP !
+        lui r1, 0             #
+        lui r2, 0             #

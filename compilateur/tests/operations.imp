@@ -1,0 +1,25 @@
+a <- 1 + 2;
+skip;
+a <- 1 + b;
+skip;
+a <- b + 1;
+skip;
+a <- 100 + b;
+skip;
+a <- b + 100;
+skip;
+a <- b + c;
+skip;
+skip;
+a <- 10 - 20;
+skip;
+a <- 1 - b;
+skip;
+a <- b - 1;
+skip;
+a <- 100 - b;
+skip;
+a <- b - 100;
+skip;
+a <- b - c;
+

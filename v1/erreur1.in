@@ -1,0 +1,11 @@
+# Le registre n'est modifié que deux cycles après son utilisation :
+
+lui r2, 0x8000
+lw r1, r2, 1
+
+# Il faut donc mieux faire :
+
+#lui r2, 0x8000
+#nop
+#nop
+#lw r1, r2, 1

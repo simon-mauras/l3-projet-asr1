@@ -1,0 +1,71 @@
+/* Defaut screen */
+tScreen <- 200;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000100000100000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000010001000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000111111100000; tScreen <- tScreen + 1;
+!tScreen <- 0b0001101110110000; tScreen <- tScreen + 1;
+!tScreen <- 0b0011111111111000; tScreen <- tScreen + 1;
+!tScreen <- 0b0010111111101000; tScreen <- tScreen + 1;
+!tScreen <- 0b0010100000101000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000011011000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+!tScreen <- 0b0000000000000000; tScreen <- tScreen + 1;
+
+i <- 0;
+tScreen <- 200;
+tVaisseau <- 100;
+maskVaisseau <- 0b0000000000000001;
+while i != 16 do
+  screen i <- !tScreen;
+  tScreen <- tScreen + 1;
+
+  !tVaisseau <- maskVaisseau;
+  maskVaisseau <- maskVaisseau + maskVaisseau;
+  tVaisseau <- tVaisseau + 1;
+
+  i <- i + 1;
+done;
+
+posVaisseau <- 8;
+
+print 'G';
+print 'o';
+print ' ';
+print '!';
+
+while 1 do
+  tVaisseau <- 100 + posVaisseau;
+  screen 15 <- !tVaisseau;
+  read caract;
+  if caract = 'a' then
+    if posVaisseau != 0 then
+      posVaisseau <- posVaisseau - 1;
+    end;
+  end;
+  if caract = 'b' then
+    if posVaisseau != 15 then
+      posVaisseau <- posVaisseau + 1;
+    end;
+  end;
+  if caract = ' ' then
+    ligne <- 15;
+    mask <- !tVaisseau;
+    while ligne != 0 do
+      ligne <- ligne - 1;
+      tScreen <- 200 + ligne;
+      act <- !tScreen | mask;
+      screen ligne <- act;
+      if !tScreen & mask then
+        !tScreen <- !tScreen ^ mask;
+	mask <- 0;
+      end;
+      screen ligne <- !tScreen;
+    done;
+  end;
+done;
